@@ -7,18 +7,19 @@ import Home from '../Home';
 import './Main.css';
 
 const Main = props => (
-    <main className='mainContainer'>
-        <Switch>
-            <Route exact path='/' component={Home} />
-        </Switch>
-    </main>
+  <main className="mainContainer">
+    <Switch>
+      <Route exact path="/" component={Home} />
+    </Switch>
+  </main>
 );
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-    changePage: () => push('/about-us')
-}, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      changePage: () => push('/about-us')
+    },
+    dispatch
+  );
 
-export default connect(
-    null,
-    mapDispatchToProps
-)(Main);
+export default connect(null, mapDispatchToProps)(Main);
