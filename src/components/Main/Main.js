@@ -2,12 +2,15 @@ import React from 'react';
 import { push } from 'react-router-redux';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Home from '../Home';
+import './Main.css';
 
 const Main = props => (
-    <main>
-        <Route exact path="/" component={Home} />
+    <main className='mainContainer'>
+        <Switch>
+            <Route exact path='/' component={Home} />
+        </Switch>
     </main>
 );
 
