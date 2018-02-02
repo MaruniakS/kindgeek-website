@@ -1,5 +1,5 @@
 import React from 'react';
-import Main from '../../components/Main';
+import { Switch } from 'react-router-dom';
 
 // import bootstrap
 import 'bootstrap/dist/css/bootstrap.css';
@@ -7,18 +7,20 @@ import 'bootstrap/dist/css/bootstrap-theme.css';
 
 //import main styles
 import '../../static/styles/core.css';
-import MainLayout from '../../layouts/MainLayout/MainLayout';
-import EmptyLayout from '../../layouts/EmptyLayout/EmptyLayout';
-import Empty from '../../components/Empty';
+
+// Components/Containers/Layouts
+import EmptyLayout from '../../layouts/EmptyLayout';
+import AppRoute from '../AppRoute';
+import Home from '../../components/Home';
+import NotFound from '../../components/NotFound';
 
 const App = () => (
   <div className="appContainer">
-    <MainLayout>
-      <Main />
-    </MainLayout>
-    <EmptyLayout>
-      <Empty />
-    </EmptyLayout>
+    <Switch>
+      <AppRoute exact path="/" component={Home} />
+      <AppRoute exact path="/us" layout={EmptyLayout} component={Home} />
+      <AppRoute path="*" component={NotFound} />
+    </Switch>
   </div>
 );
 

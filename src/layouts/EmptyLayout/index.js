@@ -1,2 +1,2 @@
-import EmptyLayout from './EmptyLayout';
+import { EmptyLayout } from './EmptyLayout';
 export default EmptyLayout;
