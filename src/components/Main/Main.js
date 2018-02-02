@@ -4,9 +4,10 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 import Home from '../Home';
+import './Main.css';
 
 const Main = props => (
-    <main>
+    <main className='mainContainer'>
         <Route exact path="/" component={Home} />
     </main>
 );
