@@ -3,22 +3,40 @@ import { push } from 'react-router-redux';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-const Home = props => (
-  <div>
-    <h1>Home</h1>
-    <p>Welcome home!</p>
-    <button onClick={() => props.changePage()}>
-      Go to about page via redux
-    </button>
-  </div>
-);
+import { increment, decrement } from '../../actions/actions';
+
+class Home extends React.Component {
+  render() {
+    return (
+      <div className="homeContainer">
+        <h1>Home</h1>
+        <p>Welcome home!</p>
+        <button onClick={() => this.props.changePage()}>
+          Go to about page via redux
+        </button>
+
+        <p className="counter">{this.props.counter.value}</p>
+        <button onClick={() => this.props.increment()}>+</button>
+        <button onClick={() => this.props.decrement()}>-</button>
+      </div>
+    );
+  }
+}
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      changePage: () => push('/about-us')
+      changePage: () => push('/about'),
+      increment,
+      decrement
     },
     dispatch
   );
 
-export default connect(null, mapDispatchToProps)(Home);
+const mapStateToProps = state => {
+  return {
+    counter: state.counter
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
