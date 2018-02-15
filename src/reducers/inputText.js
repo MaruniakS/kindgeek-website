@@ -5,7 +5,6 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
-  console.log(action.value);
   switch (action.type) {
     case CHANGE_VALUE: {
       return {
