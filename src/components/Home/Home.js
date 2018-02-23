@@ -2,6 +2,8 @@ import React from 'react';
 import { push } from 'react-router-redux';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import Lottie from 'react-lottie';
+import * as animationData from './data.json';
 
 import {
   increment,
@@ -36,6 +38,14 @@ class Home extends React.Component {
   }
 
   render() {
+    const defaultOptions = {
+      loop: true,
+      autoplay: true,
+      animationData: animationData,
+      rendererSettings: {
+        preserveAspectRatio: 'xMidYMid slice'
+      }
+    };
     return (
       <div className="homeContainer">
         <h1>Home</h1>
@@ -76,6 +86,10 @@ class Home extends React.Component {
           >
             Decrement Async
           </button>
+        </div>
+
+        <div id="animation">
+          <Lottie options={defaultOptions} />
         </div>
       </div>
     );
