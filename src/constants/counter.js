@@ -1,0 +1,2 @@
+export const INCREMENT_REQUEST = 'INC_REQUEST';
+export const DECREMENT_REQUEST = 'DEC_REQUEST';

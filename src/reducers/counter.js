@@ -1,8 +1,10 @@
 import { DECREMENT, INCREMENT, ASYNC } from '../actions/actionTypes';
+import { DECREMENT_REQUEST, INCREMENT_REQUEST } from '../constants/counter';
 
 const initialState = {
   value: 0,
-  async: false
+  asyncIncrement: false,
+  asyncDecrement: false
 };
 
 export default (state = initialState, action) => {
@@ -24,7 +26,14 @@ export default (state = initialState, action) => {
     case ASYNC: {
       return {
         ...state,
-        async: !state.async
+        asyncIncrement:
+          action.value === INCREMENT_REQUEST
+            ? !state.asyncIncrement
+            : state.asyncIncrement,
+        asyncDecrement:
+          action.value === DECREMENT_REQUEST
+            ? !state.asyncDecrement
+            : state.asyncDecrement
       };
     }
 

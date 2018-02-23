@@ -65,13 +65,13 @@ class Home extends React.Component {
         <br />
         <div className="buttons">
           <button
-            disabled={this.props.counter.async}
+            disabled={this.props.counter.asyncIncrement}
             onClick={() => this.props.asyncIncrement()}
           >
             Increment Async
           </button>
           <button
-            disabled={this.props.counter.async}
+            disabled={this.props.counter.asyncDecrement}
             onClick={() => this.props.asyncDecrement()}
           >
             Decrement Async

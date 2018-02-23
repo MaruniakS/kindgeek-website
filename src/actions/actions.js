@@ -1,4 +1,5 @@
 import { DECREMENT, INCREMENT, CHANGE_VALUE, ASYNC } from './actionTypes';
+import { DECREMENT_REQUEST, INCREMENT_REQUEST } from '../constants/counter';
 
 export const increment = () => {
   return {
@@ -19,30 +20,31 @@ export const changeValue = value => {
   };
 };
 
-export const async = () => {
+export const async = value => {
   return {
-    type: ASYNC
+    type: ASYNC,
+    value
   };
 };
 
 export const asyncIncrement = () => {
   return dispatch => {
-    dispatch(async());
+    dispatch(async(INCREMENT_REQUEST));
 
     return setTimeout(() => {
       dispatch(increment());
-      dispatch(async());
+      dispatch(async(INCREMENT_REQUEST));
     }, 3000);
   };
 };
 
 export const asyncDecrement = () => {
   return dispatch => {
-    dispatch(async());
+    dispatch(async(DECREMENT_REQUEST));
 
     return setTimeout(() => {
       dispatch(decrement());
-      dispatch(async());
+      dispatch(async(DECREMENT_REQUEST));
     }, 3000);
   };
 };
