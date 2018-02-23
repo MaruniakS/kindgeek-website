@@ -3,7 +3,13 @@ import { push } from 'react-router-redux';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { increment, decrement, changeValue } from '../../actions/actions';
+import {
+  increment,
+  decrement,
+  changeValue,
+  asyncDecrement,
+  asyncIncrement
+} from '../../actions/actions';
 import { Example } from './Example/Example';
 
 class Home extends React.Component {
@@ -52,8 +58,25 @@ class Home extends React.Component {
           {this.props.counter.value}
         </p>
         <Example onLog={this._log}>1232323213123</Example>
-        <button onClick={() => this.props.increment()}>+</button>
-        <button onClick={() => this.props.decrement()}>-</button>
+        <div className="buttons">
+          <button onClick={() => this.props.increment()}>Increment</button>
+          <button onClick={() => this.props.decrement()}>Decrement</button>
+        </div>
+        <br />
+        <div className="buttons">
+          <button
+            disabled={this.props.counter.async}
+            onClick={() => this.props.asyncIncrement()}
+          >
+            Increment Async
+          </button>
+          <button
+            disabled={this.props.counter.async}
+            onClick={() => this.props.asyncDecrement()}
+          >
+            Decrement Async
+          </button>
+        </div>
       </div>
     );
   }
@@ -84,7 +107,9 @@ const mapDispatchToProps = dispatch =>
       changePage: () => push('/about'),
       increment,
       decrement,
-      changeValue
+      changeValue,
+      asyncDecrement,
+      asyncIncrement
     },
     dispatch
   );
