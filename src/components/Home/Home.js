@@ -40,8 +40,11 @@ class Home extends React.Component {
       <div className="homeContainer">
         <h1>Home</h1>
         <p>Welcome home!</p>
-        <button onClick={() => this.props.changePage()}>
+        <button onClick={() => this.props.changePage('/about')}>
           Go to about page via redux
+        </button>
+        <button onClick={() => this.props.changePage('/example')}>
+          to Example
         </button>
         <input
           type="text"
@@ -104,7 +107,7 @@ class Home extends React.Component {
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      changePage: () => push('/about'),
+      changePage: des => push(des),
       increment,
       decrement,
       changeValue,
