@@ -8,6 +8,7 @@ const PATHS = Object.freeze({
   INDEX: '/',
   WORK_PROCESS: '/work-process',
   ABOUT: '/about',
+  EXAMPLE: '/example',
   TECHNOLOGIES: {
     INDEX: BASE_PATHS.TECHNOLOGIES,
     JS: BASE_PATHS.TECHNOLOGIES + '/js'

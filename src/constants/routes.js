@@ -3,6 +3,7 @@ import Home from '../components/Home';
 import MainLayout from '../layouts/MainLayout';
 import EmptyLayout from '../layouts/EmptyLayout';
 import NotFound from '../components/NotFound';
+import Example from '../components/Example';
 
 const ROUTES = [
   {
@@ -21,6 +22,11 @@ const ROUTES = [
     path: PATHS.TECHNOLOGIES.JS,
     exact: true,
     component: Home
+  },
+  {
+    path: PATHS.EXAMPLE,
+    exact: true,
+    component: Example
   },
   {
     path: PATHS.NOT_FOUND,
