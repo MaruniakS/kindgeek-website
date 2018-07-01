@@ -38,6 +38,7 @@ class Header extends React.PureComponent {
             <ul className="navbar-nav ml-auto">{menu}</ul>
           </div>
         </nav>
+        <ul className={'navbar-nav ms-auto sub-nav'}>{menu}</ul>
       </div>
     );
   }
