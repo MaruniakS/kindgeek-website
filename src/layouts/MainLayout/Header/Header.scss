@@ -1,14 +1,54 @@
 @import "../../../static/styles/variables";
 
+// Mixins
+
+// breakpoints
+$S:     480px;
+$M:     768px;
+$L:     1170px;
+$maxL:    $L - 1px;
+
+// media queries
+@mixin MQ($canvas) {
+  @if $canvas == S {
+    @media only screen and (min-width: $S) { @content; }
+  }
+  @else if $canvas == M {
+    @media only screen and (min-width: $M) { @content; }
+  }
+  @else if $canvas == L {
+    @media only screen and (min-width: $L) { @content; }
+  }
+  @else if $canvas == maxL {
+    @media only screen and (max-width: $maxL) { @content; }
+  }
+}
+
 .header-container {
   .navbar {
     height: 80px;
-    padding-left: 2em;
-    padding-right: 2em;
+    padding: 0 2em;
+
+    .navbar-collapse {
+      height: 100%;
+
+      .navbar-nav {
+        height: 100%;
+        align-items: center;
+      }
+    }
 
     .nav-item {
+      height: 100%;
+      display: flex;
+      align-items: center;
+
+      &.active {
+        box-shadow: inset 0 -2px 0 $kgMainColor;
+      }
 
       .nav-link {
+        position: relative;
         color: $kgMainColor;
         text-transform: uppercase;
         padding: .5em 1em;
@@ -16,6 +56,14 @@
         &:hover {
           color: $kgMainColor;
           opacity: .6;
+
+          .arrow {
+            .arrow__upper, .arrow__lower {
+              &:before, &:after {
+                background: rgba(0, 151, 167, .3);
+              }
+            }
+          }
         }
 
         &.startup-btn {
@@ -26,6 +74,72 @@
             color: white;
             background-color: #43c9c6;
             opacity: 1;
+          }
+        }
+
+        .arrow {
+          position: absolute;
+          top: 49%;
+          right: 0;
+          margin-left:-2px;
+          transition: all 0.3s ease-out;
+
+          .arrow__upper, .arrow__lower {
+            &:before, &:after {
+              content: '';
+              position: absolute;
+              display: block;
+              right: 0;
+              width: 6px;
+              height: 2px;
+              background: $kgMainColor;
+              border-radius: 2px;
+              transition: all 0.5s;
+            }
+          }
+
+          .arrow__upper {
+            &:before, &:after {
+              top: -1px;
+              transform: rotate(-45deg);
+            }
+
+            &:after {
+              right: inherit;
+              left: -9px;
+              transform: rotate(45deg);
+            }
+          }
+
+          .arrow__lower {
+            &:before, &:after {
+              top: 2px;
+              transform: rotate(45deg);
+            }
+
+            &:after {
+              right: inherit;
+              left: -9px;
+              transform: rotate(-45deg);
+            }
+          }
+
+          &.collapsed {
+            top: 50%;
+            @include MQ(maxL) {
+              //display: none;
+              transform: rotate(-90deg);
+              top: calc(50% - 5px);
+            }
+            .arrow__lower {
+              &:before, &:after {
+                top: -1px;
+                transform: rotate(-45deg);
+              }
+              &:after {
+                transform: rotate(45deg);
+              }
+            }
           }
         }
       }

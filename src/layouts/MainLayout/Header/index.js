@@ -19,14 +19,21 @@ class Header extends React.PureComponent {
   }
   render() {
     const menu = MENU.map((item, index) => {
+      const isActive = index === this.state.activeItem;
       return (
-        <li className="nav-item" key={index}>
+        <li className={'nav-item ' + (isActive ? 'active' : '')} key={index}>
           <Link
             to={item.path || '#'}
             className={'nav-link ' + (item.classes || '')}
             onClick={this._onNavigate(item, index)}
           >
             {item.title}
+            {item.children ? (
+              <div className={'arrow ' + (isActive ? '' : 'collapsed')}>
+                <span className="arrow__upper" />
+                <span className="arrow__lower" />
+              </div>
+            ) : null}
           </Link>
         </li>
       );
@@ -69,7 +76,6 @@ class Header extends React.PureComponent {
         >
           {subMenu}
         </ul>
-        <div id="services" />
       </div>
     );
   }
