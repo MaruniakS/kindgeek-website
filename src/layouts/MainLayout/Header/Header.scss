@@ -1,0 +1,26 @@
+@import "../../../static/styles/variables";
+
+.header-container {
+  .nav-item {
+    .nav-link {
+      color: $kgMainColor;
+      text-transform: uppercase;
+
+      &:hover {
+        color: $kgMainColor;
+        opacity: .6;
+      }
+
+      &.startup-btn {
+        border: 2px solid $kgButtonsColor;
+        border-radius: 50px;
+
+        &:hover {
+          color: white;
+          background-color: #43c9c6;
+          opacity: 1;
+        }
+      }
+    }
+  }
+}

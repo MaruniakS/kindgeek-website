@@ -3,8 +3,8 @@ import { Switch } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
 // import bootstrap
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/css/bootstrap-theme.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap-theme.css';
 
 //import main styles
 import '../../static/styles/core.css';
@@ -13,7 +13,7 @@ import AppRoute from '../AppRoute';
 import ROUTES from '../../constants/routes';
 
 const App = () => (
-  <div className="appContainer">
+  <div className="app-container">
     <Helmet>
       <title> React Application </title>
       <meta charSet="utf-8" />

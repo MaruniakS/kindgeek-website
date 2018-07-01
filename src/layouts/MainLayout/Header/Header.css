@@ -1,0 +1,17 @@
+.header-container .nav-item .nav-link {
+  color: #0097a7;
+  text-transform: uppercase;
+}
+.header-container .nav-item .nav-link:hover {
+  color: #0097a7;
+  opacity: 0.6;
+}
+.header-container .nav-item .nav-link.startup-btn {
+  border: 2px solid #43c9c6;
+  border-radius: 50px;
+}
+.header-container .nav-item .nav-link.startup-btn:hover {
+  color: white;
+  background-color: #43c9c6;
+  opacity: 1;
+}
