@@ -7,11 +7,23 @@ import logo from './logo.svg';
 import './Header.css';
 
 class Header extends React.PureComponent {
+  constructor() {
+    super();
+    this.state = {
+      subNavOpened: false
+    };
+
+    this._onNavigate = this._onNavigate.bind(this);
+  }
   render() {
     const menu = MENU.map((item, index) => {
       return (
         <li className="nav-item" key={index}>
-          <Link to={'#'} className={'nav-link ' + (item.classes || '')}>
+          <Link
+            to={'#'}
+            className={'nav-link ' + (item.classes || '')}
+            onClick={this._onNavigate}
+          >
             {item.title}
           </Link>
         </li>
@@ -38,9 +50,22 @@ class Header extends React.PureComponent {
             <ul className="navbar-nav ml-auto">{menu}</ul>
           </div>
         </nav>
-        <ul className={'navbar-nav ms-auto sub-nav'}>{menu}</ul>
+        <ul
+          className={
+            'navbar-nav ms-auto sub-nav ' +
+            (this.state.subNavOpened ? 'active' : '')
+          }
+        >
+          {menu}
+        </ul>
       </div>
     );
+  }
+
+  _onNavigate(e) {
+    this.setState({
+      subNavOpened: !this.state.subNavOpened
+    });
   }
 }
 
