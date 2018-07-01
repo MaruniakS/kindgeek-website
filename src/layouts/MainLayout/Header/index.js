@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import PATHS from '../../../constants/paths';
 import { MENU } from '../../../constants/menu';
 
@@ -10,7 +10,9 @@ class Header extends React.PureComponent {
   constructor() {
     super();
     this.state = {
-      subNavOpened: false
+      subNavOpened: false,
+      activeItem: null,
+      subItems: []
     };
 
     this._onNavigate = this._onNavigate.bind(this);
@@ -20,11 +22,20 @@ class Header extends React.PureComponent {
       return (
         <li className="nav-item" key={index}>
           <Link
-            to={'#'}
+            to={item.path || '#'}
             className={'nav-link ' + (item.classes || '')}
-            onClick={this._onNavigate}
+            onClick={this._onNavigate(item, index)}
           >
             {item.title}
+          </Link>
+        </li>
+      );
+    });
+    const subMenu = this.state.subItems.map((subItem, subIndex) => {
+      return (
+        <li className="nav-item" key={subIndex}>
+          <Link className="nav-link" to={subItem.path}>
+            {subItem.title}
           </Link>
         </li>
       );
@@ -56,17 +67,47 @@ class Header extends React.PureComponent {
             (this.state.subNavOpened ? 'active' : '')
           }
         >
-          {menu}
+          {subMenu}
         </ul>
+        <div id="services" />
       </div>
     );
   }
 
-  _onNavigate(e) {
-    this.setState({
-      subNavOpened: !this.state.subNavOpened
-    });
+  _onNavigate(item, index) {
+    return e => {
+      e.preventDefault();
+      // if it needs to interact with submenu
+      if (item.children) {
+        if (index === this.state.activeItem) {
+          this.setState({
+            subNavOpened: false,
+            activeItem: null,
+            subItems: []
+          });
+        } else {
+          this.setState({
+            subNavOpened: true,
+            activeItem: index,
+            subItems: item.children
+          });
+        }
+        return;
+      }
+      // if it is anchor
+      if (~item.path.indexOf('#')) {
+        // if anchor is present
+        if (document.querySelector(item.path)) {
+          this.props.history.push(item.path);
+        } else {
+          // redirect to index page if not
+          this.props.history.push('/' + item.path);
+        }
+      }
+      // other pages
+      this.props.history.push(item.path);
+    };
   }
 }
 
-export default Header;
+export default withRouter(Header);
